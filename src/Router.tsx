@@ -8,7 +8,7 @@ import Error from "./routes/Error";
 
 interface routeElement {
   path: string;
-  element: JSX.Element;
+  element: React.ReactNode;
   withAuth: boolean;
 }
 
@@ -31,7 +31,7 @@ const RouteElements: routeElement[] = [
   {
     path: "/todos",
     element: <Todos />,
-    withAuth: false,
+    withAuth: true,
   },
 ];
 
