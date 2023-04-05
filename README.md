@@ -1,70 +1,149 @@
-# Getting Started with Create React App
+### 기능 요구사항
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- [ ] 로그인 페이지 #signin
+  - [ ] 로그인 기능
+    - [ ] 성공 시 JWT 토큰 로컬스토리지에 저장
+- [ ] 회원가입 페이지 #signup
+  - [ ] 회원가입 기능
+    - [ ] 성공 시 `/signin` 리다이렉트
+- [ ] 공통 기능
 
-## Available Scripts
+  - [ ] 예외 처리
+    - [ ] 이메일 조건: `@` 포함
+    - [ ] 비밀번호 조건: 8자 이상
+  - [ ] 리다이렉트
+    - [ ] 토큰 있으면 `/todo` 리다이렉트
 
-In the project directory, you can run:
+- [ ] 투두리스트 페이지 #todo
+  - [ ] 투두리스트 추가
+  - [ ] 투두리스트 수정
+  - [ ] 투두리스트 체크
+  - [ ] 투두리스트 삭제
 
-### `npm start`
+### 과제
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 1. 로그인 / 회원가입
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- [ ] `/signup` 경로에 회원가입 기능 `/signin` 경로에 로그인 기능
+- [ ] 페이지 안에 이메일 input, 비밀번호 input, 제출 button이 포함된 형태로 구성해주세요
+  - 이메일 input에 `data-testid="email-input"` 속성을 부여해주세요
+  - 패스워드 input에 `data-testid="password-input"` 속성을 부여해주세요
+  - 회원가입 button에 `data-testid="signup-button"` 속성을 부여해주세요
+  - 로그인 button에 `data-testid="signin-button"` 속성을 부여해주세요
 
-### `npm test`
+```tsx
+<!-- 예시 -->
+<input data-testid="email-input" />
+<input data-testid="password-input" />
+<button data-testid="signup-button">회원가입</button>
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- 두 페이지의 UI는 동일해도 무방합니다.
+- 회원가입과 로그인 페이지의 버튼에 부여되는 test-id가 다른 것에 유의해주세요
 
-### `npm run build`
+### Assignment 1
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- [ ] 회원가입과 로그인 페이지에 이메일과 비밀번호의 유효성 검사기능 구현
+  - 이메일 조건: `@` 포함
+  - 비밀번호 조건: 8자 이상
+  - 이메일과 비밀번호의 유효성 검사 조건은 별도의 추가 조건 부여 없이 위의 조건대로만 진행해주세요 (e.g. 비밀번호 유효성 검사에 특수문자 포함 등의 새로운 조건을 추가하는 행위, 비밀번호 확인 조건을 추가하는 행위 등은 지양해주세요)
+- [ ] 입력된 이메일과 비밀번호가 유효성 검사를 통과하지 못한다면 button에 `disabled` 속성을 부여
+  - 보안 상 실제 사용하고 계신 이메일과 패스워드말고 테스트용 이메일, 패스워드 사용을 권장드립니다.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Assignment 2
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- [ ] 회원가입 페이지에서 버튼을 클릭 시 회원가입을 진행하고 회원가입이 정상적으로 완료되었을 시 `/signin` 경로로 이동
 
-### `npm run eject`
+### Assignment 3
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- [ ] 로그인 페이지에서 버튼을 클릭 시, 로그인을 진행하고 로그인이 정상적으로 완료되었을 시 `/todo` 경로로 이동
+- [ ] 반환 받은 JWT 응답을 로컬스토리지에 저장하기
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Assignment 4
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- [ ] 로그인 여부에 따른 리다이렉트 처리를 구현
+  - [ ] 로컬 스토리지에 토큰이 있는 상태로 `/signin` 또는 `/signup` 페이지에 접속한다면 `/todo` 경로로 리다이렉트
+  - [ ] 로컬 스토리지에 토큰이 없는 상태로 `/todo`페이지에 접속한다면 `/signin` 경로로 리다이렉트
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+### 2. TODO LIST
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Assignment 5
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- [ ] `/todo`경로에 접속하면 투두 리스트의 목록 조회
+  - [ ] 목록에서는 TODO의 내용과 완료 여부가 표시
+  - [ ] TODO의 완료 여부는 `<input type="checkbox" />`를 통해 표현
+  - [ ] TODO는 `<li>` tag를 이용해 감싸주세요
 
-### Code Splitting
+```tsx
+<li>
+  <label>
+    <input type="checkbox" />
+    <span>TODO 1</span>
+  </label>
+</li>
+<li>
+  <label>
+    <input type="checkbox" />
+    <span>TODO 2</span>
+  </label>
+</li>
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Assignment 6
 
-### Analyzing the Bundle Size
+- [ ] 리스트 페이지에 새로운 TODO를 입력할 수 있는 input과 추가 button
+  ```tsx
+  <input data-testid="new-todo-input" />
+  <button data-testid="new-todo-add-button">추가</button>
+  ```
+  - [ ] TODO 입력 input에는 `data-testid="new-todo-input"` 속성을 부여해주세요
+  - [ ] TODO 추가 button에는 `data-testid="new-todo-add-button"` 속성을 부여해주세요
+  - [ ] 추가 button을 클릭하면 입력 input의 내용이 새로운 TODO로 추가
+  - [ ] TODO를 추가 한 뒤 새로고침을 해도 추가한 TODO가 목록에 보여야 합니다.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Assignment 7
 
-### Making a Progressive Web App
+- [ ] TODO의 체크박스를 통해 완료 여부를 수정할 수 있도록 해주세요.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Assignment 8
 
-### Advanced Configuration
+- [ ] TODO 우측에 수정버튼과 삭제 버튼을 만들어주세요
+- [ ] 수정 버튼에는 `data-testid="modify-button"` 속성을 부여해주세요
+- [ ] 삭제 버튼에는 `data-testid="delete-button"` 속성을 부여해주세요
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```tsx
+<li>
+  <label>
+    <input type="checkbox" />
+    <span>TODO 1</span>
+  </label>
+  <button data-testid="modify-button">수정</button>
+  <button data-testid="delete-button">삭제</button>
+</li>
+```
 
-### Deployment
+### Assignment 9
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- [ ] 투두 리스트의 삭제 기능을 구현해주세요
+- [ ] 투두 리스트의 TODO 우측의 삭제버튼을 누르면 해당 아이템이 삭제되도록 해주세요
 
-### `npm run build` fails to minify
+### Assignment 10
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- [ ] 투두 리스트의 수정 기능을 구현해주세요
+- [ ] TODO 우측의 수정 버튼을 누르면 수정모드가 활성화
+  - 수정모드에서는 TODO의 내용을 변경할 수 있어야 합니다.
+  - 수정모드에서는 TODO의 내용이 input창 안에 입력된 형태로 변경해주세요
+  - 수정 input창에는 `data-testid="modify-input"` 속성을 부여해주세요
+- [ ] 수정모드에서는 TODO의 우측에 제출버튼과 취소버튼이 표시되게 해주세요
+  - 제출버튼에는 `data-testid="submit-button"` 속성을 부여해주세요
+  - 취소버튼에는 `data-testid="cancel-button"` 속성을 부여해주세요
+- [ ] 제출버튼을 누르면 수정한 내용을 제출해서 내용이 업데이트 될 수 있도록 해주세요
+- [ ] 취소버튼을 누르면 수정한 내용을 초기화 하고, 수정모드를 비활성화 해주세요
+
+```tsx
+<input data-testid="modify-input" />
+<button data-testid="submit-button">제출</button>
+<button data-testid="cancel-button">취소</button>
+```
