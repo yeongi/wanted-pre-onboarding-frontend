@@ -1,4 +1,4 @@
-import BASE_URL from "../lib/base/BASE_URL";
+import BASE_URL from "../lib/const/BASE_URL";
 import { userInfo } from "../type/user";
 
 export const userSignInPost = (body: userInfo) => {
