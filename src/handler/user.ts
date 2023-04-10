@@ -5,10 +5,18 @@ export const userSignUp = async (body: UserInfo) => {
   const signUpResult = await userSignUpPost(body);
   const result = await signUpResult.json();
   console.log(result);
+  return {
+    result: result.status === 200 ? true : false,
+    message: result.message,
+  };
 };
 
 export const userSignIn = async (body: UserInfo) => {
   const signUpResult = await userSignInPost(body);
   const result = await signUpResult.json();
   console.log(result);
+  return {
+    result: result.status === 200 ? true : false,
+    message: result.message,
+  };
 };
