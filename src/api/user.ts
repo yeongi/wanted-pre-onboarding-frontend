@@ -1,22 +1,24 @@
 import BASE_URL from "../lib/const/BASE_URL";
-import { userInfo } from "../type/user";
+import { UserInfo } from "../type/user";
 
-export const userSignInPost = (body: userInfo) => {
+const postFetchSetting = {
+  headers: {
+    "Content-Type": "application/json",
+    credentials: "include",
+  },
+  method: "POST",
+};
+
+export const userSignInPost = (body: UserInfo) => {
   return fetch(`${BASE_URL}/auth/signin`, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-    method: "post",
+    ...postFetchSetting,
     body: JSON.stringify(body),
   });
 };
 
-export const userSignUpPost = (body: userInfo) => {
+export const userSignUpPost = (body: UserInfo) => {
   return fetch(`${BASE_URL}/auth/signup`, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-    method: "post",
+    ...postFetchSetting,
     body: JSON.stringify(body),
   });
 };
