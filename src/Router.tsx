@@ -5,11 +5,13 @@ import SignIn from "./routes/SignIn";
 import SignUp from "./routes/SignUp";
 import Todos from "./routes/Todos";
 import Error from "./routes/Error";
+import AuthLayout from "./component/AuthLayout";
 
 interface routeElement {
   path: string;
   element: React.ReactNode;
   withAuth: boolean;
+  redirectPath?: string;
 }
 
 const RouteElements: routeElement[] = [
@@ -22,21 +24,36 @@ const RouteElements: routeElement[] = [
     path: "/signin",
     element: <SignIn />,
     withAuth: false,
+    redirectPath: "/todo",
   },
   {
     path: "/signup",
     element: <SignUp />,
     withAuth: false,
+    redirectPath: "/todo",
   },
   {
-    path: "/todos",
+    path: "/todo",
     element: <Todos />,
     withAuth: true,
+    redirectPath: "/signin",
   },
 ];
 
 const router = createBrowserRouter(
   RouteElements.map((route) => {
+    if (route.redirectPath) {
+      return {
+        path: route.path,
+        element: (
+          <AuthLayout to={route.redirectPath} withAuth={route.withAuth}>
+            {route.element}
+          </AuthLayout>
+        ),
+        errorElement: <Error />,
+      };
+    }
+
     return {
       path: route.path,
       element: route.element,
