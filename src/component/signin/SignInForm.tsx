@@ -1,20 +1,31 @@
 import React from "react";
 import { UserInfo } from "../../type/user";
 import { userSignIn } from "../../handler/user";
+import { useRouterTo } from "../../lib/hooks/useRouterTo";
+import { putUserTokenInLocalStorage } from "../../lib/utils/localTokenUtils";
 
 const SignInForm = () => {
+  const { routerTo } = useRouterTo();
+
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-
     const userInfo: UserInfo = {
       email: formData.get("userId") as string,
       password: formData.get("password") as string,
     };
 
-    console.log(userInfo);
     const signInResult = await userSignIn(userInfo);
-    console.log(signInResult);
+
+    if (signInResult.result) {
+      putUserTokenInLocalStorage(signInResult.access_token);
+
+      routerTo("/todo");
+    }
+
+    if (!signInResult.result) {
+      alert(signInResult.message);
+    }
   };
 
   return (
