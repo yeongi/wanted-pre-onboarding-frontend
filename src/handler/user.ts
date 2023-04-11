@@ -1,13 +1,25 @@
 import { userSignUpPost, userSignInPost } from "../api/user";
 import { UserInfo } from "../type/user";
 
-export const userSignUp = async (body: UserInfo) => {
+type SignResponse = {
+  result: boolean;
+  message: string;
+};
+
+export const userSignUp = async (body: UserInfo): Promise<SignResponse> => {
   const signUpResult = await userSignUpPost(body);
-  const result = await signUpResult.json();
-  console.log(result);
+
+  if (signUpResult.ok) {
+    return {
+      result: signUpResult.ok,
+      message: signUpResult.statusText,
+    };
+  }
+
+  const badRes = await signUpResult.json();
   return {
-    result: result.status === 200 ? true : false,
-    message: result.message,
+    result: false,
+    message: badRes.message,
   };
 };
 

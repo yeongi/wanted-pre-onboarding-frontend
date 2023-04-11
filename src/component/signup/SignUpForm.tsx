@@ -6,8 +6,11 @@ import {
   passwordRegexpMathcher,
 } from "../../lib/utils/regexpMatcher";
 
+import { useRouterTo } from "../../lib/hooks/useRouterTo";
+
 const SignUpForm = () => {
   const submitRef = useRef<HTMLButtonElement>(null);
+  const { routerTo } = useRouterTo();
 
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -19,7 +22,15 @@ const SignUpForm = () => {
     };
 
     const { result, message } = await userSignUp(userInfo);
-    alert(message);
+
+    if (result) {
+      alert(message);
+      routerTo("/signin");
+    }
+
+    if (!result) {
+      alert(message);
+    }
   };
 
   const onChangeFormInput = (e: React.FormEvent<HTMLFormElement>) => {
@@ -31,9 +42,9 @@ const SignUpForm = () => {
 
     if (emailRegexpMathcher(email) && passwordRegexpMathcher(password)) {
       if (submitRef.current) submitRef.current.disabled = false;
+    } else {
+      if (submitRef.current) submitRef.current.disabled = true;
     }
-
-    if (submitRef.current) submitRef.current.disabled = true;
   };
 
   return (
