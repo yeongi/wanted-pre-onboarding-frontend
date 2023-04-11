@@ -1,12 +1,22 @@
 import { userSignUpPost, userSignInPost } from "../api/user";
 import { UserInfo } from "../type/user";
 
-type SignResponse = {
+type SignUpResponse = {
   result: boolean;
   message: string;
 };
 
-export const userSignUp = async (body: UserInfo): Promise<SignResponse> => {
+type SignInResponse =
+  | {
+      result: true;
+      access_token: string;
+    }
+  | {
+      result: false;
+      message: string;
+    };
+
+export const userSignUp = async (body: UserInfo): Promise<SignUpResponse> => {
   const signUpResult = await userSignUpPost(body);
 
   if (signUpResult.ok) {
@@ -23,12 +33,18 @@ export const userSignUp = async (body: UserInfo): Promise<SignResponse> => {
   };
 };
 
-export const userSignIn = async (body: UserInfo) => {
+export const userSignIn = async (body: UserInfo): Promise<SignInResponse> => {
   const signUpResult = await userSignInPost(body);
-  const result = await signUpResult.json();
-  console.log(result);
+  const { access_token } = await signUpResult.json();
+  if (signUpResult.ok) {
+    return {
+      result: signUpResult.ok,
+      access_token,
+    };
+  }
+
   return {
-    result: result.status === 200 ? true : false,
-    message: result.message,
+    result: false,
+    message: signUpResult.statusText,
   };
 };

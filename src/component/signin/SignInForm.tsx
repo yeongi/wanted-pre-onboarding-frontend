@@ -13,7 +13,8 @@ const SignInForm = () => {
     };
 
     console.log(userInfo);
-    // const signInResult = await userSignIn(userInfo);
+    const signInResult = await userSignIn(userInfo);
+    console.log(signInResult);
   };
 
   return (
