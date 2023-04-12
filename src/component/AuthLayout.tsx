@@ -15,11 +15,11 @@ const AuthLayout = (props: RedirectLayoutProps) => {
     let curAuth: boolean = getUserTokenInLocalStorage() === null ? false : true;
 
     if (props.withAuth) {
-      if (!curAuth) routerTo(props.to);
+      if (!curAuth) routerTo(props.to, true);
     }
 
     if (!props.withAuth) {
-      if (curAuth) routerTo(props.to);
+      if (curAuth) routerTo(props.to, true);
     }
   }, []);
 
