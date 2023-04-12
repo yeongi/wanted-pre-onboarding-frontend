@@ -21,7 +21,7 @@ const SignUpForm = () => {
       password: formData.get("password") as string,
     };
 
-    const { result, message } = await userSignUp(userInfo);
+    const { result } = await userSignUp(userInfo);
 
     if (result) {
       alert("회원가입이 성공적으로 완료되었습니다.");
