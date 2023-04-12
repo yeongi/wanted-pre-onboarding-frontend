@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { getTodoList } from "../api/todo";
 import TodoList from "../component/todolist/TodoList";
 import { TodoInfo } from "../type/todo";
@@ -13,8 +13,10 @@ const Todos: React.FC = () => {
   const [todoList, setTodoList] = useState<TodoInfo[]>([]);
 
   useEffect(() => {
-    fetchTodoRequest();
-  });
+    (async () => {
+      await fetchTodoRequest();
+    })();
+  }, [fetchTodoRequest, todoList]);
 
   return (
     <div>

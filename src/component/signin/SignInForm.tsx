@@ -24,7 +24,9 @@ const SignInForm = () => {
     }
 
     if (!signInResult.result) {
-      alert(signInResult.message);
+      alert(
+        "잘못된 이메일과 비밀번호를 입력하셨습니다. 다시 입력하여 주십시요."
+      );
     }
   };
 

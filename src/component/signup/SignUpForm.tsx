@@ -24,12 +24,12 @@ const SignUpForm = () => {
     const { result, message } = await userSignUp(userInfo);
 
     if (result) {
-      alert(message);
+      alert("회원가입이 성공적으로 완료되었습니다.");
       routerTo("/signin");
     }
 
     if (!result) {
-      alert(message);
+      alert("오류가 발생했습니다. 다른 이메일을 입력해 주십시요.");
     }
   };
 
