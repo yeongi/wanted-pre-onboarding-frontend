@@ -4,3 +4,9 @@ export interface TodoInfo {
   isCompleted: false;
   userId: number;
 }
+
+export interface ModifyInfo {
+  todoId: number;
+  todo: string;
+  isCompleted: boolean;
+}

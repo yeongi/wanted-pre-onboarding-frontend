@@ -1,5 +1,6 @@
 import BASE_URL from "../lib/const/BASE_URL";
 import { getUserTokenInLocalStorage } from "../lib/utils/localTokenUtils";
+import { ModifyInfo } from "../type/todo";
 
 const headerWithToken = {
   "Content-Type": "application/json",
@@ -26,15 +27,11 @@ export const postUserTodo = async (todo: string) => {
   return res ? res.json() : null;
 };
 
-export const updateUserTodo = async (
-  todoId: number,
-  todo: string,
-  isCompleted: boolean
-) => {
-  const res = await fetch(`${BASE_URL}/todos/${todoId}`, {
+export const updateUserTodo = async (info: ModifyInfo) => {
+  const res = await fetch(`${BASE_URL}/todos/${info.todoId}`, {
     headers: headerWithToken,
     method: "put",
-    body: JSON.stringify({ todo, isCompleted }),
+    body: JSON.stringify({ todo: info.todo, isCompleted: info.isCompleted }),
   });
 
   return res ? res.json() : null;

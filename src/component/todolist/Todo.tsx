@@ -1,5 +1,7 @@
 import { deleteUserTodo } from "../../api/todo";
 import { TodoInfo } from "../../type/todo";
+import { useState } from "react";
+import ModifyForm from "./ModifyForm";
 
 type TodoProps = {
   todo: TodoInfo;
@@ -7,9 +9,15 @@ type TodoProps = {
 };
 
 const Todo = (props: TodoProps) => {
-  const updateTodoHandler = async (
-    e: React.MouseEvent<HTMLButtonElement>
-  ) => {};
+  const [modifyMode, setMode] = useState<boolean>(false);
+
+  const openHandler = () => {
+    setMode(true);
+  };
+
+  const closeHandler = () => {
+    setMode(false);
+  };
 
   const deleteTodoHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
     const deleteRes = await deleteUserTodo(props.todo.id);
@@ -19,17 +27,27 @@ const Todo = (props: TodoProps) => {
 
   return (
     <li>
-      <label>
-        <input type="checkbox" />
-        <span>{props.todo.todo}</span>
+      {modifyMode && (
+        <ModifyForm
+          todo={props.todo}
+          refreshHandler={props.refreshHandler}
+          closeHandler={closeHandler}
+        />
+      )}
+      {!modifyMode && (
+        <label>
+          <input type="checkbox" />
+          <span>{props.todo.todo}</span>
 
-        <button data-testid="modify-button" onClick={updateTodoHandler}>
-          수정
-        </button>
-        <button data-testid="delete-button" onClick={deleteTodoHandler}>
-          삭제
-        </button>
-      </label>
+          <button data-testid="modify-button" onClick={openHandler}>
+            수정
+          </button>
+
+          <button data-testid="delete-button" onClick={deleteTodoHandler}>
+            삭제
+          </button>
+        </label>
+      )}
     </li>
   );
 };

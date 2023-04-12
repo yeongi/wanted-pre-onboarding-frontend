@@ -7,14 +7,16 @@ const AddTodoForm = (props: RefresProps) => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
-    const myStr = formData.get("myTodo") as string;
-    if (!myStr) return;
-    const postRes = await postUserTodo(myStr);
 
-    console.log(postRes);
+    const myStr = formData.get("myTodo") as string;
+
+    if (!myStr) return;
+
+    e.currentTarget.reset();
+
+    await postUserTodo(myStr);
 
     props.refreshHandler();
-    formData.set("myTodo", "");
   };
 
   return (
