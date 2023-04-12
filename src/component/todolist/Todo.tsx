@@ -1,4 +1,4 @@
-import { deleteUserTodo } from "../../api/todo";
+import { deleteUserTodo, updateUserTodo } from "../../api/todo";
 import { TodoInfo } from "../../type/todo";
 import { useState } from "react";
 import ModifyForm from "./ModifyForm";
@@ -25,6 +25,19 @@ const Todo = (props: TodoProps) => {
     props.refreshHandler();
   };
 
+  const updateCheckedHandler = async (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const body = {
+      ...props.todo,
+      isCompleted: !props.todo.isCompleted,
+    };
+
+    await updateUserTodo(body);
+
+    props.refreshHandler();
+  };
+
   return (
     <li>
       {modifyMode && (
@@ -36,7 +49,11 @@ const Todo = (props: TodoProps) => {
       )}
       {!modifyMode && (
         <label>
-          <input type="checkbox" />
+          <input
+            type="checkbox"
+            onChange={updateCheckedHandler}
+            checked={props.todo.isCompleted}
+          />
           <span>{props.todo.todo}</span>
 
           <button data-testid="modify-button" onClick={openHandler}>

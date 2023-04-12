@@ -15,7 +15,7 @@ const ModifyForm = (props: ModifyProps) => {
     const myStr = formData.get("myTodo") as string;
 
     const info: ModifyInfo = {
-      todoId: props.todo.id,
+      id: props.todo.id,
       todo: myStr,
       isCompleted: props.todo.isCompleted,
     };

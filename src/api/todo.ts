@@ -28,7 +28,7 @@ export const postUserTodo = async (todo: string) => {
 };
 
 export const updateUserTodo = async (info: ModifyInfo) => {
-  const res = await fetch(`${BASE_URL}/todos/${info.todoId}`, {
+  const res = await fetch(`${BASE_URL}/todos/${info.id}`, {
     headers: headerWithToken,
     method: "put",
     body: JSON.stringify({ todo: info.todo, isCompleted: info.isCompleted }),

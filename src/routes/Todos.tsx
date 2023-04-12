@@ -7,7 +7,6 @@ import AddTodoForm from "../component/todolist/AddTodoForm";
 const Todos: React.FC = () => {
   const fetchTodoRequest = useCallback(async () => {
     const res = await getTodoList();
-
     setTodoList(res);
   }, []);
 

@@ -6,7 +6,7 @@ export interface TodoInfo {
 }
 
 export interface ModifyInfo {
-  todoId: number;
+  id: number;
   todo: string;
   isCompleted: boolean;
 }
