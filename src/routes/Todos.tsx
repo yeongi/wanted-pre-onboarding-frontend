@@ -22,7 +22,7 @@ const Todos: React.FC = () => {
       <h1>투두리스트 페이지 입니다.</h1>
       <hr />
       <AddTodoForm refreshHandler={fetchTodoRequest} />
-      <TodoList lists={todoList} />
+      <TodoList lists={todoList} refreshHandler={fetchTodoRequest} />
     </div>
   );
 };
