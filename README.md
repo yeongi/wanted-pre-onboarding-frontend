@@ -1,3 +1,29 @@
+### YEOMGI's TO DO LIST
+
+베포 : netplify
+
+링크 : [https://yeongi-todolist.netlify.app/](https://yeongi-todolist.netlify.app/)
+
+> username : redpepper@naver.com
+> password : 12345678
+
+**로컬에서 실행하는 방법**
+
+git clone 하신 후에
+
+```tsx
+yarn install && yarn start
+```
+
+사용한 라이브러리
+
+```
+"react": "^18.2.0",
+"react-dom": "^18.2.0",
+"react-router-dom": "^6.10.0",
+"typescript": "^5.0.3”
+```
+
 ### 기능 요구사항
 
 - [x] 로그인 페이지 #signin
