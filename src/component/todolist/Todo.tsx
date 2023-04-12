@@ -1,7 +1,7 @@
 import { TodoInfo } from "../../type/todo";
 
 const Todo = (props: TodoInfo) => {
-  const deleteTodo;
+  // const deleteTodo;
 
   return (
     <li>
@@ -9,9 +9,7 @@ const Todo = (props: TodoInfo) => {
         <input type="checkbox" />
         <span>{props.todo}</span>
 
-        <button onClick={} data-testid="delete-button">
-          삭제
-        </button>
+        <button data-testid="delete-button">삭제</button>
       </label>
     </li>
   );

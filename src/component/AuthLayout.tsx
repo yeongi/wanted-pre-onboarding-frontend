@@ -21,7 +21,7 @@ const AuthLayout = (props: RedirectLayoutProps) => {
     if (!props.withAuth) {
       if (curAuth) routerTo(props.to, true);
     }
-  }, []);
+  });
 
   return <>{props.children}</>;
 };

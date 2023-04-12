@@ -1,5 +1,6 @@
 import React from "react";
 import { useRouterTo } from "../lib/hooks/useRouterTo";
+import { removeUserTokenInLocalStorage } from "../lib/utils/localTokenUtils";
 
 const Main: React.FC = () => {
   const { routerTo } = useRouterTo();
@@ -27,6 +28,14 @@ const Main: React.FC = () => {
         }}
       >
         signup
+      </button>
+      <button
+        onClick={() => {
+          removeUserTokenInLocalStorage();
+          alert("로그아웃 됐습니다.");
+        }}
+      >
+        signout
       </button>
     </>
   );
