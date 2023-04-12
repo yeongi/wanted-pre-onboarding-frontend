@@ -38,8 +38,8 @@ export const userSignIn = async (body: UserInfo): Promise<SignInResponse> => {
   const { access_token } = await signUpResult.json();
   if (signUpResult.ok) {
     return {
-      result: signUpResult.ok,
       access_token,
+      result: signUpResult.ok,
     };
   }
 
