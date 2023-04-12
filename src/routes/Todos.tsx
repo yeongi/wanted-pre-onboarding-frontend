@@ -1,25 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { getTodoList } from "../api/todo";
 import TodoList from "../component/todolist/TodoList";
 import { TodoInfo } from "../type/todo";
+import AddTodoForm from "../component/todolist/AddTodoForm";
 
 const Todos: React.FC = () => {
-  const testTodoRequest = async () => {
+  const fetchTodoRequest = useCallback(async () => {
     const res = await getTodoList();
-    console.log("todo를 가져옴", res);
+
     setTodoList(res);
-  };
+  }, []);
 
   const [todoList, setTodoList] = useState<TodoInfo[]>([]);
 
   useEffect(() => {
-    testTodoRequest();
+    fetchTodoRequest();
   }, []);
 
   return (
     <div>
       <h1>투두리스트 페이지 입니다.</h1>
       <hr />
+      <AddTodoForm refreshHandler={fetchTodoRequest} />
       <TodoList lists={todoList} />
     </div>
   );
