@@ -14,7 +14,7 @@ const Todos: React.FC = () => {
 
   useEffect(() => {
     fetchTodoRequest();
-  }, []);
+  });
 
   return (
     <div>
