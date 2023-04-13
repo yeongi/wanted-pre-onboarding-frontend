@@ -8,9 +8,23 @@ const headerWithToken = {
   credentials: "include",
 };
 
-export const getTodoList = async () => {
+// export const getTodoList = async () => {
+//   console.log(headerWithToken);
+//   const res = await fetch(`${BASE_URL}/todos`, {
+//     headers: headerWithToken,
+//     method: "GET",
+//   });
+
+//   return res ? res.json() : null;
+// };
+
+export const getTodoList = async (token = getUserTokenInLocalStorage()) => {
   const res = await fetch(`${BASE_URL}/todos`, {
-    headers: headerWithToken,
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+      credentials: "include",
+    },
     method: "GET",
   });
 

@@ -16,8 +16,7 @@ const AddTodoForm = () => {
     e.currentTarget.reset();
 
     await postUserTodo(myStr);
-
-    fetchTodoRequest();
+    await fetchTodoRequest();
   };
 
   return (

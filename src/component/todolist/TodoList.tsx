@@ -3,20 +3,11 @@ import { useEffect } from "react";
 import Todo from "./Todo";
 import { useTodosState } from "../../store/TodosContext";
 
-// type TodoProps = {
-//   lists: TodoInfo[];
-//   refreshHandler: () => void;
-// };
-
 const TodoList = () => {
-  const { userId, todoList, fetchTodoRequest } = useTodosState();
+  const { todoList, fetchTodoRequest } = useTodosState();
 
   useEffect(() => {
     fetchTodoRequest();
-    console.log("user Id :", userId);
-    console.log("todoList ", todoList);
-
-    return;
   }, [fetchTodoRequest]);
 
   return (

@@ -1,24 +1,12 @@
-import {
-  createContext,
-  useCallback,
-  useState,
-  useContext,
-  useEffect,
-} from "react";
+import { createContext, useState, useContext } from "react";
 import { getTodoList } from "../api/todo";
-import {
-  getUserTokenInLocalStorage,
-  removeUserTokenInLocalStorage,
-} from "../lib/utils/localTokenUtils";
+import { removeUserTokenInLocalStorage } from "../lib/utils/localTokenUtils";
 import { TodoInfo } from "../type/todo";
 
-type UserId = string | null;
-
 export type TodoControlState = {
-  userId: UserId;
   todoList: TodoInfo[];
   resetToDolistHandler: () => void;
-  fetchTodoRequest: () => Promise<void>;
+  fetchTodoRequest: (token?: string | null) => Promise<void>;
 };
 
 const TodosStateContext = createContext<TodoControlState | undefined>(
@@ -31,30 +19,18 @@ export function TodosContextProvider({
   children: React.ReactNode;
 }) {
   const [todoList, setTodoList] = useState<TodoInfo[]>([]);
-  const [userId, setUserId] = useState<UserId>(getUserTokenInLocalStorage());
 
-  useEffect(() => {
-    setUserId(getUserTokenInLocalStorage());
-  });
-
-  const fetchTodoRequest = useCallback(async () => {
-    setUserId(getUserTokenInLocalStorage());
-
-    if (!userId) return;
+  const fetchTodoRequest = async () => {
     const res: TodoInfo[] = await getTodoList();
     setTodoList(res);
-
-    console.log("fetched ", userId, todoList);
-  }, [userId]);
+  };
 
   const resetToDolistHandler = () => {
     removeUserTokenInLocalStorage();
     setTodoList([]);
-    setUserId(null);
   };
 
   const todoControl: TodoControlState = {
-    userId,
     todoList,
     resetToDolistHandler,
     fetchTodoRequest,

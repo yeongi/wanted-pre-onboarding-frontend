@@ -4,6 +4,7 @@ const tokenKey = "accessToken";
 
 export const putUserTokenInLocalStorage = (token: string) => {
   localStorage.setItem(tokenKey, token);
+  return;
 };
 
 export const getUserTokenInLocalStorage = () => {

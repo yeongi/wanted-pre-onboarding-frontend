@@ -22,7 +22,7 @@ const SignInForm = () => {
     if (signInResult.result) {
       putUserTokenInLocalStorage(signInResult.access_token);
 
-      await fetchTodoRequest();
+      await fetchTodoRequest(signInResult.access_token);
 
       routerTo("/todo");
     }
