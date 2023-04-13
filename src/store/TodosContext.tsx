@@ -1,4 +1,4 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, useCallback } from "react";
 import { getTodoList } from "../api/todo";
 import { removeUserTokenInLocalStorage } from "../lib/utils/localTokenUtils";
 import { TodoInfo } from "../type/todo";
@@ -20,10 +20,10 @@ export function TodosContextProvider({
 }) {
   const [todoList, setTodoList] = useState<TodoInfo[]>([]);
 
-  const fetchTodoRequest = async () => {
+  const fetchTodoRequest = useCallback(async () => {
     const res: TodoInfo[] = await getTodoList();
     setTodoList(res);
-  };
+  }, []);
 
   const resetToDolistHandler = () => {
     removeUserTokenInLocalStorage();
