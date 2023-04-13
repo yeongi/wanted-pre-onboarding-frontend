@@ -1,9 +1,10 @@
 import React from "react";
 import { useRouterTo } from "../lib/hooks/useRouterTo";
-import { removeUserTokenInLocalStorage } from "../lib/utils/localTokenUtils";
+import { useTodosState } from "../store/TodosContext";
 
 const Main: React.FC = () => {
   const { routerTo } = useRouterTo();
+  const control = useTodosState();
 
   return (
     <>
@@ -31,7 +32,7 @@ const Main: React.FC = () => {
       </button>
       <button
         onClick={() => {
-          removeUserTokenInLocalStorage();
+          control.resetToDolistHandler();
           alert("로그아웃 됐습니다.");
         }}
       >

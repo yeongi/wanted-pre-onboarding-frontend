@@ -1,23 +1,31 @@
-import { TodoInfo } from "../../type/todo";
+// import { TodoInfo } from "../../type/todo";
+import { useEffect } from "react";
 import Todo from "./Todo";
+import { useTodosState } from "../../store/TodosContext";
 
-type TodoProps = {
-  lists: TodoInfo[];
-  refreshHandler: () => void;
-};
+// type TodoProps = {
+//   lists: TodoInfo[];
+//   refreshHandler: () => void;
+// };
 
-const TodoList = (props: TodoProps) => {
+const TodoList = () => {
+  const { userId, todoList, fetchTodoRequest } = useTodosState();
+
+  useEffect(() => {
+    fetchTodoRequest();
+    console.log("user Id :", userId);
+    console.log("todoList ", todoList);
+
+    return;
+  }, [fetchTodoRequest]);
+
   return (
     <ul>
-      {props.lists.length === 0 && <h1>리스트가 존재하지 않습니다.</h1>}
-      {props.lists.length > 0 &&
-        props.lists.map((list) => {
+      {todoList.length === 0 && <h1>리스트가 존재하지 않습니다.</h1>}
+      {todoList.length > 0 &&
+        todoList.map((list) => {
           return (
-            <Todo
-              key={list.id}
-              refreshHandler={props.refreshHandler}
-              todo={list}
-            />
+            <Todo key={list.id} refreshHandler={fetchTodoRequest} todo={list} />
           );
         })}
     </ul>

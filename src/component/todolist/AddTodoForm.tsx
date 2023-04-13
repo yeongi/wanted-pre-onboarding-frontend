@@ -1,8 +1,9 @@
 import { postUserTodo } from "../../api/todo";
+import { useTodosState } from "../../store/TodosContext";
 
-type RefresProps = { refreshHandler: () => void };
+const AddTodoForm = () => {
+  const { fetchTodoRequest } = useTodosState();
 
-const AddTodoForm = (props: RefresProps) => {
   const todoSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -16,7 +17,7 @@ const AddTodoForm = (props: RefresProps) => {
 
     await postUserTodo(myStr);
 
-    props.refreshHandler();
+    fetchTodoRequest();
   };
 
   return (

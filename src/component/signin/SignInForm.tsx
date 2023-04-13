@@ -3,9 +3,11 @@ import { UserInfo } from "../../type/user";
 import { userSignIn } from "../../handler/user";
 import { useRouterTo } from "../../lib/hooks/useRouterTo";
 import { putUserTokenInLocalStorage } from "../../lib/utils/localTokenUtils";
+import { useTodosState } from "../../store/TodosContext";
 
 const SignInForm = () => {
   const { routerTo } = useRouterTo();
+  const { fetchTodoRequest } = useTodosState();
 
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -19,6 +21,8 @@ const SignInForm = () => {
 
     if (signInResult.result) {
       putUserTokenInLocalStorage(signInResult.access_token);
+
+      await fetchTodoRequest();
 
       routerTo("/todo");
     }
